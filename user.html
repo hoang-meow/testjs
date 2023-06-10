@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div class="menu">
+        <ul id = "listmenu" class="listmenu">
+            <li>
+                <a onclick="dropdowmenu()">
+                <i class="fa-solid fa-bars" ></i>
+            </a>
+             </li>
+            <li> <img src="https://httpdl.howizbiz.com/static/img/logoOrigin.7aeebb8a.svg" alt=""></li>
+            <li>Hệ Thống Cung Cấp Dữ Liệu Môi Trường</li>
+            <li class ="space"></li>
+            <div >
+              <ul id="info"></ul>
+            </div>
+        </ul>
+        
+       
+    </div>
+    <div class="main">
+        <div class="sibar">
+            <ul class="listsibar">
+                <li style="cursor:pointer"><i class="fa-regular fa-address-book"></i><a href=""></a>Khách hàng</li>
+                <li style="cursor:pointer"><i class="fa-solid fa-user"></i><a href=""></a>Người dùng</li>
+            </ul>
+            <ul class="listinfo">
+                <li>Tài khoản của tôi</li>
+                <input type="file" id="myFile" name="filename">
+                <p id="b64"></p>
+                <li id="changeAv"><i class="fa-regular fa-address-card" style="margin-right: 10px;"></i>Hồ Sơ</li>
+                <li id="changePass"><i class="fa-solid fa-pen" style="margin-right: 10px;"></i>Đổi mật khẩu</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <div class="contentUser">
+                <li style="display: flex; align-items:center"><img src="./img/avata.png" style="display: inline-block; height: 40px;" alt=""><h1>Người dùng</h1></li>
+                <input type="text" id="mySearch"  placeholder="Tìm kiếm theo tên hoặc sdt ..." title="Company">
+                <div class="fillter">
+                    <select name="" id="status" >
+                        <option value="" selected>Toàn bộ</option>
+                        <option value="false">Hoạt động</option>
+                        <option value="true">Vô hiệu</option>
+                    </select>
+                    <select name="" id="quyenFillter" >
+                        <option value="" selected>Quyền</option>
+                    </select>
+                    <input type="text" id="begin" placeholder="Ngày bắt đầu" >
+                    <input type="text" id="end" placeholder="Ngày kết thúc" >
+                </div>
+                <h1>Danh sach nguoi dung </h1>
+                <button id = "showAddUser" class="open-button" style="margin-top: 20px; float:right    ">Thêm mới</button>
+                <table id="getUser">
+                    <tr>
+                        <td>Tên hiển thị</td>
+                        <td>Tên đăng nhập</td>
+                        <td>Số điện thoại</td>
+                        <td>Trạng thái</td>
+                        <td>Quyền</td>
+                        <td>Ngày tạo</td>
+                    </tr>
+                </table>
+            
+                <div class="page">
+                    <h3 id="detailPage">
+            
+                    </h3>
+                    <h3 id="labelPage"></h3>
+                    <div id="listPage">
+                        <ul class="listPage"></ul>
+                    </div>
+                
+                    <select name="itemsPerPage" id="itemsPerPage">
+                        <option value="5">5 / trang</option>
+                        <option value="10">10/ trang</option>
+                        <option value="25">25 / trang</option>
+                        <option value="50">50 / trang</option>
+                    </select>
+                
+                </div>
+               
+            
+                <!-- form thêm mới-->
+                <div class="form-popup" id="myForm">
+                    <form action="/action_page.php" class="form-container">
+                        <input id="cname" type="text" placeholder="Tên hiển thị">
+                        <input id="uname" type="text" placeholder="Tên đăng nhập">
+                        <input id="cemail" type="text" placeholder="Email">
+                        <input id="phone" type="text" placeholder="Điện thoại">
+                        <input id="password" type="password" placeholder="Mật khẩu">
+                        <input id="verifyPassword" type="password" placeholder="Mật khẩu xác nhận">
+            
+                        <label for="quyen">Quyen:</label>
+                        <select id="quyen" multiple>
+            
+                        </select>
+            
+                        <button id= "addUser" type="button" class="btn">Add</button>
+                        <button id= "closeFr" type="button" class="btn cancel">Close</button>
+                    </form>
+                </div>
+                <!-- form update-->
+                <div class="form-popup" id="myFormUpdate">
+                    <form action="/action_page.php" class="form-container">
+                        <input id="cnameup" type="text" placeholder="Ten hien thi">
+                        <input id="unameup" type="text" placeholder="Ten dang nhap" readonly>
+                        <input id="cemailup" type="text" placeholder="Email">
+                        <input id="phoneup" type="text" placeholder="Điện thoại">
+                        <label for="quyenup">Quyen:</label>
+                        <select id="quyenup" multiple>
+            
+                        </select>
+            
+                        <button id= "updateUser"  type="button" class="btn">update</button>
+                        <button id= "closeFrUp"  type="button" class="btn cancel" >Close</button>
+                    </form>
+                </div>
+                
+                    <!-- form delete-->
+                    <div class="form-popup-delete" id="myFormDl">
+                        <button id= "deleteUser"  type="button" class="btn">Áp dụng</button>
+                        <button id= "closeFrDl"  type="button" class="btn cancel" >Không</button>
+                    </div>
+    
+                    <!-- form detail-->
+                    <div class="form-popup-detail infome" id="detailUser">
+                         <div id="infodetail">
+    
+                         </div>
+                        <button id= "intodetail"  type="button" class="btn">Hồ sơ</button>
+                        <button id= "logout"  type="button" class="btn cancel" >Đăng xuất</button>
+                    </div>
+            </div>
+            <div class="contenInfoUser">
+                <h1>Thông tin cá nhân</h1>
+                <div class="tableInfo">
+                    <ul id="listContenInfo">
+                      
+                        <li><h1>Hồ sơ</h1></li>
+                        <li>Thông tin cơ bản</li>
+
+                    </ul>
+                    <input id="nameinfo" type="text">
+                    <input id="phoneinfo"type="text">
+                    <button id= "saveInfo"  type="button" class="btn cancel" >Lưu</button>
+                </div>
+            </div>
+            <div class="changePassInfo">
+                <h1>Đổi mật khẩu</h1>
+                <div class="tableInfo">
+                    <input id ="passwordNow" type="text" placeholder="Mật khẩu mới">
+                    <input id="password_confirmation" type="text" placeholder="Mật lại khẩu mới">
+                    <input id="old_password"type="text" placeholder="Mật khẩu cũ">
+                    <button id= "savePass"  type="button" class="btn cancel" >Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+   
+    <script type="module" src="js/user.js"></script>
+</body>
+
+</html>
