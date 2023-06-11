@@ -249,8 +249,9 @@ function closeForm() {
     selectup.innerHTML = "";
     document.getElementById("myFormUpdate").style.display = "none";
     document.getElementById("myFormDl").style.display = "none";
-    let myFormDl = document.getElementById("myFormDl");
-    myFormDl.removeChild(myFormDl.firstElementChild);
+    if(document.querySelector('#myFormDl h4') != null){
+        document.querySelector('#myFormDl h4').remove();
+    }
 }
 function getSelectValues(select) {
     var result = [];
