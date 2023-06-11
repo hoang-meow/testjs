@@ -55,6 +55,7 @@ const searchUserApi = () => {
 }
 
 function showUpdateUser(i) {
+    selectup.innerHTML = "";
     getRoles(selectup);
        document.getElementById("myFormUpdate").style.display = "block";
        let data = i.currentTarget.myData;
@@ -128,7 +129,7 @@ function getRoles(element) {
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function () {
       
-    
+        
         roles = JSON.parse(xhttp.responseText);
         console.log("Roles", roles);
         if (xhttp.status == 200) {

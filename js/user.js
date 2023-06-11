@@ -28,6 +28,7 @@ let cemailup = document.getElementById("cemailup");
 let unameup = document.getElementById("unameup");
 let phone = document.getElementById("phone");
 
+
 let infome = document.getElementById("info");
 let detailUser = document.getElementById("detailUser");
 let infodetail = document.getElementById("infodetail");
@@ -64,7 +65,7 @@ addUser.addEventListener('click', function userAddApi() {
         role_ids: getSelectValues(select),
     };
     getRouter('addUsers');
-    let User = new getData(url, '', token, newUser,);
+    let User = new getData(url, newUser, token);
     User.userAddApi();
     getUsers();
 
@@ -74,16 +75,17 @@ addUser.addEventListener('click', function userAddApi() {
 
 // update user
 updateUser.addEventListener('click', function userUpdateApi() {
+    let phoneup = document.getElementById('phoneup');
     let updateUser = {
         name: cnameup.value,
         username: unameup.value,
         email: cemailup.value,
         id: id,
-        phone: null,
+        mobile: phoneup.value,
         role_ids: getSelectValues(selectup),
     };
     getUrlId('updateUser', id);
-    let User = new getData(url, '', token, '', updateUser);
+    let User = new getData(url, updateUser, token );
     User.userUpdateApi();
     getUsers();
 });
@@ -188,13 +190,17 @@ let input = document.getElementById("mySearch");
 input.addEventListener('keyup', searchUserApi);
 let changePass = document.getElementById('changePass');
 let changeAv = document.getElementById('changeAv');
-let savePass = document.getElementById('savePass');
+let savePass = document.getElementById('savePass')
+let infoShowload = document.getElementById('info');
+
 
 showAddUser.addEventListener('click', showUser);
 closeFr.addEventListener('click', closeForm);
 closeFrUp.addEventListener('click', closeForm);
 closeFrDl.addEventListener('click', closeForm);
 infome.addEventListener('click', showDetailUser);
+
+infoShowload.addEventListener('click', showDetailUser);
 logout.addEventListener('click', logoutUser);
 intodetail.addEventListener('click', intodetailUser);
 saveInfo.addEventListener('click', updateInfor);
@@ -226,12 +232,16 @@ function showDetailUser() {
     infoUserRole.innerHTML = info.user.role.name;
     infodetail.appendChild(infoUserRole);
     detailUser.insertBefore(infodetail, detailUser.firstChild)
-    detailUser.style.display = "block";
+    detailUser.classList.toggle("toggle");
 }
 
 function showUser() {
     document.getElementById("myForm").style.display = "block";
-    getRoles(select);
+  
+    if(document.querySelectorAll('#quyen option').length == 0){
+        getRoles(select);
+    }
+    
 }
 function closeForm() {
     document.getElementById("myForm").style.display = "none";
@@ -240,9 +250,7 @@ function closeForm() {
     document.getElementById("myFormUpdate").style.display = "none";
     document.getElementById("myFormDl").style.display = "none";
     let myFormDl = document.getElementById("myFormDl");
-    myFormDl.removeChild(myFormDl.firstElementChild)
-
-
+    myFormDl.removeChild(myFormDl.firstElementChild);
 }
 function getSelectValues(select) {
     var result = [];

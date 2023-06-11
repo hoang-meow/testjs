@@ -1,10 +1,8 @@
 export class getData {
-    constructor(url,params,token,newUser,updateUser,updateInfo) {
+    constructor(url,params,token) {
         this.url = url ;
         this.params = params ;
         this.token = token;
-        this.newUser = newUser;
-        this.updateUser = updateUser;
     }
 
     getData() {
@@ -21,19 +19,19 @@ export class getData {
     }
 
     userAddApi() {
-        console.log(this.newUser.cname);
+        console.log(this.params.cname);
         const xhttp = new XMLHttpRequest();
         xhttp.open("POST", this.url ,false);
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.setRequestHeader("Authorization", " Bearer " + this.token);
         xhttp.send(JSON.stringify({
-            "name": this.newUser.cname,
-            "username":  this.newUser.uname,
-            "email":  this.newUser.cemail,
-            "mobile" :this.newUser.phone,
-            "password":  this.newUser.password,
-            "password_confirmation":  this.newUser.verifyPassword,
-            "role_ids":  this.newUser.role_ids,
+            "name": this.params.cname,
+            "username":  this.params.uname,
+            "email":  this.params.cemail,
+            "mobile" :this.params.phone,
+            "password":  this.params.password,
+            "password_confirmation":  this.params.verifyPassword,
+            "role_ids":  this.params.role_ids,
         }));
         console.log("Add-User");
         let data = JSON.parse(xhttp.responseText);
@@ -46,12 +44,12 @@ export class getData {
         xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhttp.setRequestHeader("Authorization", " Bearer " + this.token)
         xhttp.send(JSON.stringify({
-            "name": this.updateUser.name,
-            "username": this.updateUser.username,
-            "email": this.updateUser.email,
-            "id": this.updateUser.id,
-            "mobile": null,
-            "role_ids": this.updateUser.role_ids,
+            "name": this.params.name,
+            "username": this.params.username,
+            "email": this.params.email,
+            "id": this.params.id,
+            "mobile": this.params.mobile,
+            "role_ids": this.params.role_ids,
         }))
         console.log("Update-User");
         let data = JSON.parse(xhttp.responseText);
@@ -95,7 +93,7 @@ export class getData {
         xhttp.setRequestHeader("Authorization", " Bearer " + this.token);
         xhttp.send(JSON.stringify({
             "name": this.params.name,
-            "mobile" :this.params.phone,
+            "mobile" :this.params.mobile,
             "avatar_base64":  this.params.avatar_base64,
         }));
         let data = JSON.parse(xhttp.responseText);

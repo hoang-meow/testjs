@@ -219,3 +219,6 @@ cursor: pointer;
 #changeAv ,#changePass{
   cursor: pointer;
 }
+.toggle {
+  display: block;
+}
